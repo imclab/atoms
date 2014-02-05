@@ -95,15 +95,15 @@ function extractBody() {
       if (!headers[i]) return;
 
       // remove junk
-      $('sup', this).remove();
+      $('sup, span:hidden', this).remove();
 
       // have to do some manual logic here
       switch (headers[i]) {
         case 'density':
-          item.density = $('.sorttext', this).text().trim();
+          item.density = value($('.sorttext', this).text());
           break;
         default:
-          item[headers[i]] = $(this).text().trim();
+          item[headers[i]] = value($(this).text());
           break;
       }
     });
@@ -111,10 +111,17 @@ function extractBody() {
     data.push(item);
   });
 
+  function value(text) {
+    text = text.trim();
+    if ('–' == text) return undefined;
+    if (!text) return undefined;
+    return text;
+  }
+
   return data;
 }
 
-extractBody();
+console.log(JSON.stringify(extractBody(), null, 2));
 ```
 
 Eventually this code will become a module and will become easier to do the next.
