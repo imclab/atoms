@@ -1,0 +1,6 @@
+{
+  "name": "atoms",
+  "version": "0.0.1",
+  "main": "./index.json",
+  "keywords": ["periodic table of elements", "atoms", "science"]
+}
